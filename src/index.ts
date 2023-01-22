@@ -19,14 +19,17 @@ wss.on('connection', (ws: WebSocket, request: IncomingMessage) => {
   duplex.on('data', async (message) => {
     console.log('Message received:', message);
 
-    const [command] = message.split(' ');
+    const [command, ...args] = message.split(' ');
 
     try {
-      const result = await RCCommands[command as keyof typeof RCCommands]();
+      const result = await RCCommands[command as keyof typeof RCCommands](args);
+
       console.log(`Run '${command}' success with result '${result}'`);
+
       duplex.write(prepareToWrite(`${command} ${result}`));
     } catch (error) {
       console.log(`Run '${command}' failed with error '${error}'`);
+
       duplex.write(prepareToWrite(`${error}`));
     }
   });

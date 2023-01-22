@@ -1,3 +1,3 @@
 export const prepareToWrite = (str: string): string => {
-  return str.replaceAll(' ', ' ');
+  return str.trim().replaceAll(' ', ' ');
 };
