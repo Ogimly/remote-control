@@ -33,6 +33,7 @@ export const drawCircle = async (arg: number): Promise<string> => {
 
   await mouse.move([points[0]]);
   await mouse.drag(points);
+  await mouse.move([startPoint]);
 
   return `R=${radius}`;
 };
