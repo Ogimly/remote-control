@@ -24,5 +24,5 @@ export const RCCommands = {
 
   [RemoteControl.draw_square]: draw.drawSquare,
   [RemoteControl.draw_rectangle]: draw.drawRectangle,
-  //   [RemoteControl.draw_circle]: draw.moveDown,
+  [RemoteControl.draw_circle]: draw.drawCircle,
 };
