@@ -18,6 +18,11 @@ module.exports = {
     extensions: ['.ts', '.js'],
   },
 
+  externals: {
+    bufferutil: 'bufferutil',
+    'utf-8-validate': 'utf-8-validate',
+  },
+
   module: {
     rules: [
       {

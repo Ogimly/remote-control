@@ -9,9 +9,9 @@ httpServer.listen(HTTP_PORT);
 
 console.log(`Start websocket on the ${WEBSOCKET_PORT} port!`);
 
-const wss = new WebSocketServer({ port: WEBSOCKET_PORT });
+const wsServer = new WebSocketServer({ port: WEBSOCKET_PORT });
 
-wss.on('connection', (ws: WebSocket, request: IncomingMessage) => {
+wsServer.on('connection', (ws: WebSocket, request: IncomingMessage) => {
   console.log(`Connected on the ${request.socket.remotePort} remote port!`);
 
   const duplex = createWebSocketStream(ws, { encoding: 'utf8', decodeStrings: false });
@@ -22,7 +22,9 @@ wss.on('connection', (ws: WebSocket, request: IncomingMessage) => {
     const [command, ...args] = message.split(' ');
 
     try {
-      const result = await RCCommands[command as keyof typeof RCCommands](args);
+      const operation = RCCommands[command as keyof typeof RCCommands];
+      if (!operation) throw Error(`Unknown command '${command}'`);
+      const result = await operation(args);
 
       console.log(`Run '${command}' success with result '${result}'`);
 
@@ -40,6 +42,6 @@ wss.on('connection', (ws: WebSocket, request: IncomingMessage) => {
 });
 
 process.on('SIGINT', () => {
-  wss.close();
+  wsServer.close();
   process.exit();
 });
