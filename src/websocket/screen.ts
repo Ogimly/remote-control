@@ -1,7 +1,7 @@
 import { mouse, screen, Region } from '@nut-tree/nut-js';
 import Jimp from 'jimp';
 
-const geStartPosition = (center: number, delta: number, max: number): number => {
+const getStartPosition = (center: number, delta: number, max: number): number => {
   const newPos = Math.max(0, center - delta / 2);
   return newPos + delta > max ? max - delta : newPos;
 };
@@ -16,8 +16,8 @@ export const printScreen = async (args: number[]): Promise<string> => {
   const { x, y } = await mouse.getPosition();
 
   const printScreenRegion = new Region(
-    geStartPosition(x, width, screenWidth),
-    geStartPosition(y, height, screenHeight),
+    getStartPosition(x, width, screenWidth),
+    getStartPosition(y, height, screenHeight),
     width,
     height
   );
