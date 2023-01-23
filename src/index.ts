@@ -26,7 +26,7 @@ wsServer.on('connection', (ws: WebSocket, request: IncomingMessage) => {
       if (!operation) throw Error(`Unknown command '${command}'`);
       const result = await operation(args);
 
-      console.log(`Run '${command}' success with result '${result}'`);
+      // console.log(`Run '${command}' success with result '${result}'`);
 
       duplex.write(prepareToWrite(`${command} ${result}`));
     } catch (error) {

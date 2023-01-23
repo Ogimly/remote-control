@@ -1,5 +1,6 @@
 import * as mouse from './mouse';
 import * as draw from './draw';
+import * as screen from './screen';
 
 export const HTTP_PORT = 8181;
 export const WEBSOCKET_PORT = 8080;
@@ -13,6 +14,7 @@ export const enum RemoteControl {
   draw_square = 'draw_square',
   draw_rectangle = 'draw_rectangle',
   draw_circle = 'draw_circle',
+  prnt_scrn = 'prnt_scrn',
 }
 
 export const RCCommands = {
@@ -25,4 +27,6 @@ export const RCCommands = {
   [RemoteControl.draw_square]: draw.drawSquare,
   [RemoteControl.draw_rectangle]: draw.drawRectangle,
   [RemoteControl.draw_circle]: draw.drawCircle,
+
+  [RemoteControl.prnt_scrn]: screen.printScreen,
 };
